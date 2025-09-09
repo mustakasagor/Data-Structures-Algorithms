@@ -1,0 +1,63 @@
+#include <stdio.h>
+
+struct Stack {
+    int arr[100];
+    int top;
+    int size;
+};
+
+void init(struct Stack *s, int n) {
+    s->top = -1;
+    s->size = n;
+}
+
+void push(struct Stack *s, int value) {
+    if (s->top == s->size - 1) {
+        printf("Stack Overflow! Cannot push %d\n", value);
+    } else {
+        s->top++;
+        s->arr[s->top] = value;
+        printf("%d pushed into stack.\n", value);
+    }
+}
+
+void pop(struct Stack *s) {
+    if (s->top == -1) {
+        printf("Stack Underflow! Nothing to pop.\n");
+    } else {
+        printf("%d popped from stack.\n", s->arr[s->top]);
+        s->top--;
+    }
+}
+
+void traverse(struct Stack *s) {
+    if (s->top == -1) {
+        printf("Stack is empty.\n");
+    } else {
+        printf("Stack elements: ");
+        for (int i = s->top; i >= 0; i--) {
+            printf("%d ", s->arr[i]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    struct Stack s;
+    int n;
+
+    printf("Enter stack size: ");
+    scanf("%d", &n);
+
+    init(&s, n);
+
+    push(&s, 10);
+    push(&s, 20);
+    push(&s, 30);
+    traverse(&s);
+
+    pop(&s);
+    traverse(&s);
+
+    return 0;
+}
